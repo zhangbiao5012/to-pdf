@@ -14,6 +14,13 @@
         <itext.version>7.1.15</itext.version>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/zhangbiao5012/to-pdf</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
