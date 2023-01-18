@@ -1,7 +1,8 @@
-package com.github.zhangbiao;
+package com.github.zhangbiao.handler;
 
 import com.github.zhangbiao.entity.List2PdfEntity;
 import com.github.zhangbiao.entity.List2PdfFieldEntity;
+import com.github.zhangbiao.handler.ToPDF;
 import com.itextpdf.io.font.PdfEncodings;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.font.PdfFontFactory;
@@ -50,7 +51,7 @@ public class List2Pdf<T> implements ToPDF {
     public List2Pdf(List2PdfEntity<T> entity, OutputStream outputStream, PageSize targetPdfPageSize, String fontPath) {
         PdfDocument pdfDocument = new PdfDocument(new PdfWriter(outputStream));
         this.pdfDocument = pdfDocument;
-        this.document = new Document(pdfDocument, targetPdfPageSize.rotate());
+        this.document = new Document(pdfDocument, targetPdfPageSize);
         try {
             this.document.setFont(PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H));
             this.document.setFontSize(fontSize);
