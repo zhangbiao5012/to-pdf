@@ -51,6 +51,13 @@ public class List2Pdf<T> implements ToPDF {
         PdfDocument pdfDocument = new PdfDocument(new PdfWriter(outputStream));
         this.pdfDocument = pdfDocument;
         this.document = new Document(pdfDocument, targetPdfPageSize.rotate());
+        try {
+            this.document.setFont(PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H));
+            this.document.setFontSize(fontSize);
+            this.document.setFontColor(ColorConstants.BLACK);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.entity = entity;
         this.fontPath = fontPath;
         this.columnWidths = this.entity.getColumnWidths();
@@ -94,15 +101,15 @@ public class List2Pdf<T> implements ToPDF {
         String v = value == null ? "" : value.toString();
 
         Cell pdfCell = new Cell(1, 1);
-        float cloW = field.getWidth();
-        float realH = v.length() * fontSize;
-        float height = ((realH / cloW) + 1) * fontSize * 5f;
-
-        pdfCell.setHeight(height);
-        pdfCell.setPadding(0f);
+//        float cloW = field.getWidth();
+//        float realH = v.length() * fontSize;
+//        float height = ((realH / cloW) + 1) * fontSize * 5f;
+//
+//        pdfCell.setHeight(height);
+        pdfCell.setPadding(5f);
 
         Text text = new Text(v);
-        setPdfCellFont(text, bold);
+        fontHandler(text, bold);
         Paragraph paragraph = new Paragraph(text).setPadding(0f).setMargin(0f);
 
         paragraph.setMaxWidth(this.allColWidth);
@@ -127,14 +134,7 @@ public class List2Pdf<T> implements ToPDF {
      * @param text
      * @param bold
      */
-    private void setPdfCellFont(Text text, boolean bold) {
-        try {
-            text.setFont(PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        text.setFontSize(fontSize);
-        text.setFontColor(ColorConstants.BLACK);
+    private void fontHandler(Text text, boolean bold) {
         if (bold) {
             text.setBold();
         }

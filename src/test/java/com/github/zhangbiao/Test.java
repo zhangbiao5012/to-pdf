@@ -15,46 +15,20 @@ public class Test {
     @org.junit.Test
     public void data2Pdf() throws Exception {
         List<Entity> sources = new ArrayList<>();
-        sources.add(new Entity("1min",
-                "2023-01-06 17:38:26",
-                "2023-01-06 17:38:26",
-                "测试人员",
-                "部门",
-                "琼B123456",
-                "贵州省贵阳市观山湖区观山街道阳关大道110号联合广场贵州省贵阳市观山湖区观山街道阳关大道110号联合广场贵州省贵阳市观山湖区观山街道阳关大道110号联合广场贵州省贵阳市观山湖区观山街道阳关大道110号联合广场贵州省贵阳市观山湖区观山街道阳关大道110号联合广场end",
-                "贵州省贵阳市观山湖区观山街道阳关大道110号联合广场",
-                "12312313.12"
-        ));
-        sources.add(new Entity("1min",
-                "2023-01-06 17:38:26",
-                "2023-01-06 17:38:26",
-                "测试人员",
-                "部门",
-                "琼B123456",
-                "贵州省贵阳市观山湖区观山街道阳关大道110号联合广场",
-                "贵州省贵阳市观山湖区观山街道阳关大道110号联合广场",
-                "12312313.12"
-        ));
-        sources.add(new Entity("1min",
-                "2023-01-06 17:38:26",
-                "2023-01-06 17:38:26",
-                "测试人员",
-                "部门",
-                "琼B123456",
-                "贵州省贵阳市观山湖区观山街道阳关大道110号联合广场",
-                "贵州省贵阳市观山湖区观山街道阳关大道110号联合广场",
-                "12312313.12"
-        ));
-        sources.add(new Entity("1min",
-                "2023-01-06 17:38:26",
-                "2023-01-06 17:38:26",
-                "测试人员",
-                "部门",
-                "琼B123456",
-                "贵州省贵阳市观山湖区观山街道阳关大道110号联合广场",
-                "贵州省贵阳市观山湖区观山街道阳关大道110号联合广场",
-                "12312313.12"
-        ));
+
+        for (int i = 0; i < 100; i++) {
+            sources.add(new Entity("1min",
+                    "2023-01-06 17:38:26",
+                    "2023-01-06 17:38:26",
+                    "测试人员",
+                    "部门",
+                    "琼B123456",
+                    "贵州省贵阳市观山湖区观山街道阳关大道110号联合广场贵州省贵阳市观山湖区观山街道阳关大道110号联合广场贵州省贵阳市观山湖区观山街道阳关大道110号联合广场贵州省贵阳市观山湖区观山街道阳关大道110号联合广场贵州省贵阳市观山湖区观山街道阳关大道110号联合广场end",
+                    "贵州省贵阳市观山湖区观山街道阳关大道110号联合广场",
+                    "12312313.12"
+            ));
+        }
+
         List<List2PdfFieldEntity<Entity, ?>> fieldList = new ArrayList<>();
         fieldList.add(new List2PdfFieldEntity<>("时间", 0, 105, Entity::getConsumeTimeFormat));
         fieldList.add(new List2PdfFieldEntity<>("始发地签到时间", 1, 175, Entity::getSignDateStart));
@@ -72,7 +46,9 @@ public class Test {
                 Files.newOutputStream(Paths.get("/Users/zhangbiao/Downloads/2.pdf")),
                 "./doc/font/SimHei.TTF"
         );
+        long start = System.currentTimeMillis();
         pdf.exec();
+        System.out.println(System.currentTimeMillis() - start);
     }
 
 
